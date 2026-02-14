@@ -1,0 +1,126 @@
+.search-bar-container {
+  position: relative;
+  width: 300px;
+  margin: 0 20px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 8px 12px;
+  background: #000;
+  border: 1px solid #00ffcc;
+  color: #00ffcc;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-bar::placeholder {
+  color: #00ffcc80;
+}
+
+.search-bar:focus {
+  border-color: #00ffcc;
+  box-shadow: 0 0 8px #00ffcc40;
+}
+
+.search-bar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #000;
+  border: 1px solid #00ffcc;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 255, 204, 0.2);
+}
+
+.search-dropdown-item {
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #00ffcc20;
+  transition: all 0.15s;
+}
+
+.search-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.search-dropdown-item:hover,
+.search-dropdown-item.selected {
+  background: #00ffcc20;
+}
+
+.artist-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.artist-name {
+  color: #00ffcc;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.artist-listeners {
+  color: #00ffcc80;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+.search-loading,
+.search-error,
+.search-no-results {
+  color: #00ffcc;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  text-align: center;
+  cursor: default;
+}
+
+.search-error {
+  color: #ff3366;
+}
+
+.loading-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scrollbar styling */
+.search-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-dropdown::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb {
+  background: #00ffcc40;
+  border-radius: 4px;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #00ffcc60;
+}
