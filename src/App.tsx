@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react'
-import './App.css'
 import { SearchBar } from './components/SearchBar'
 import { YouTubePlayer } from './components/YouTubePlayer'
 import { LoadingState } from './components/LoadingState'
