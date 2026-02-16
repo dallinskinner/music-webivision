@@ -135,7 +135,7 @@ export function SearchBar({ onArtistSelect, disabled = false }: SearchBarProps) 
             suggestions.map((artist, index) => (
               <div
                 key={artist.mbid || artist.name}
-                className={clsx(styles.searchDropdownItem, index === selectedIndex && styles.selected)}
+                className={clsx(styles.searchDropdownItem, { [styles.selected]: index === selectedIndex })}
                 onClick={() => handleSelectArtist(artist.name)}
                 onMouseEnter={() => setSelectedIndex(index)}
               >

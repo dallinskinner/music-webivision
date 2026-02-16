@@ -255,7 +255,7 @@ function App() {
         </main>
 
         {/* Queue sidebar */}
-        <aside className={clsx('queue-sidebar', queueOpen ? 'open' : 'closed')}>
+        <aside className={clsx('queue-sidebar', { 'open': queueOpen, 'closed': !queueOpen })}>
           <div className="queue-header">
             <span className="queue-title">&gt; TRANSMISSION_QUEUE</span>
             <span className="queue-count">[{queue.length}]</span>
@@ -264,7 +264,7 @@ function App() {
             {queue.map((track, index) => (
               <div
                 key={track.id}
-                className={clsx('queue-item', currentTrack?.id === track.id && 'active')}
+                className={clsx('queue-item', { 'active': currentTrack?.id === track.id })}
                 onClick={() => playTrack(track, index)}
               >
                 <div className="queue-item-number">
