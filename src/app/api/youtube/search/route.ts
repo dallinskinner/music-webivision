@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   const query = `"${artist}" official music video`;
 
   // Check cache first
-  const cached = getCachedSearch(query, maxResults);
+  const cached = await getCachedSearch(query, maxResults);
   if (cached) {
     return NextResponse.json({ items: cached, fromCache: true });
   }
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
   const items = data.items || [];
 
   // Cache the results
-  setCachedSearch(query, maxResults, items);
+  await setCachedSearch(query, maxResults, items);
 
   return NextResponse.json({ items, fromCache: false });
 }

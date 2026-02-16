@@ -10,15 +10,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      const existing = findUserByGoogleId(profile.sub);
+      const existing = await findUserByGoogleId(profile.sub);
       if (existing) {
-        updateUser(existing.id, {
+        await updateUser(existing.id, {
           email: profile.email,
           name: (profile.name as string) ?? null,
           image: (profile.picture as string) ?? null,
         });
       } else {
-        createUser({
+        await createUser({
           google_id: profile.sub,
           email: profile.email,
           name: (profile.name as string) ?? null,
@@ -30,7 +30,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async jwt({ token, account, profile }) {
       if (account?.provider === 'google' && profile?.sub) {
-        const user = findUserByGoogleId(profile.sub);
+        const user = await findUserByGoogleId(profile.sub);
         if (user) {
           token.userId = user.id;
         }

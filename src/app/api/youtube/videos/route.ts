@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   }
 
   // Check cache — only fetch uncached IDs from YouTube
-  const { cached, uncachedIds } = getCachedVideos(videoIds);
+  const { cached, uncachedIds } = await getCachedVideos(videoIds);
 
   if (uncachedIds.length === 0) {
     return NextResponse.json({ items: cached, fromCache: true });
@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
 
   // Cache newly fetched videos
   if (freshVideos.length > 0) {
-    setCachedVideos(freshVideos);
+    await setCachedVideos(freshVideos);
   }
 
   const allItems = [...cached, ...freshVideos];
