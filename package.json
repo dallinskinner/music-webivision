@@ -11,9 +11,10 @@
     "check": "prettier --write . && eslint --fix"
   },
   "dependencies": {
-    "better-sqlite3": "^12.6.2",
+    "@libsql/client": "^0.14.0",
     "lucide-react": "^0.545.0",
     "next": "^15.3.0",
+    "next-auth": "5.0.0-beta.30",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.18"
@@ -21,7 +22,6 @@
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
@@ -30,6 +30,6 @@
     "typescript": "^5.7.2"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["better-sqlite3"]
+    "onlyBuiltDependencies": []
   }
 }
