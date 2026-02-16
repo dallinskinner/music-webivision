@@ -1,0 +1,51 @@
+.auth-btn-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Terminal Grotesque', monospace;
+}
+
+.auth-loading {
+  color: var(--grey-mid);
+  letter-spacing: 2px;
+}
+
+.auth-user {
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.auth-bracket {
+  color: var(--grey-light);
+}
+
+.auth-btn {
+  background: var(--black);
+  border: 1px solid rgba(98, 144, 152, 0.3);
+  color: var(--white);
+  padding: 0.4rem 0.75rem;
+  font-family: 'Terminal Grotesque', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.auth-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(98, 144, 152, 0.6);
+  transform: translateY(-2px);
+}
+
+.auth-disconnect {
+  color: var(--grey-light);
+  font-size: 0.7rem;
+}
+
+.auth-disconnect:hover {
+  color: var(--white);
+}

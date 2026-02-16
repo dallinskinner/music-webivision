@@ -1,7 +1,18 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 import type { YouTubeSearchResult, YouTubeVideoDetails } from '../api/types';
+
+export interface DbUser {
+  id: string;
+  google_id: string;
+  email: string;
+  name: string | null;
+  image: string | null;
+  created_at: number;
+  updated_at: number;
+}
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -24,6 +35,16 @@ db.exec(`
     video_id TEXT PRIMARY KEY,
     details TEXT NOT NULL,
     cached_at INTEGER NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    google_id TEXT UNIQUE NOT NULL,
+    email TEXT NOT NULL,
+    name TEXT,
+    image TEXT,
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL
   );
 `);
 
@@ -92,4 +113,33 @@ export function setCachedVideos(videos: YouTubeVideoDetails[]): void {
   });
 
   insertMany(videos);
+}
+
+export function findUserByGoogleId(googleId: string): DbUser | undefined {
+  return db
+    .prepare('SELECT * FROM users WHERE google_id = ?')
+    .get(googleId) as DbUser | undefined;
+}
+
+export function createUser(profile: {
+  google_id: string;
+  email: string;
+  name: string | null;
+  image: string | null;
+}): DbUser {
+  const now = Date.now();
+  const id = crypto.randomUUID();
+  db.prepare(
+    'INSERT INTO users (id, google_id, email, name, image, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+  ).run(id, profile.google_id, profile.email, profile.name, profile.image, now, now);
+  return { id, ...profile, created_at: now, updated_at: now };
+}
+
+export function updateUser(
+  id: string,
+  profile: { email: string; name: string | null; image: string | null },
+): void {
+  db.prepare(
+    'UPDATE users SET email = ?, name = ?, image = ?, updated_at = ? WHERE id = ?',
+  ).run(profile.email, profile.name, profile.image, Date.now(), id);
 }

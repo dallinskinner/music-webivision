@@ -6,6 +6,7 @@ import { usePlaylistBuilder } from './hooks/usePlaylistBuilder'
 import { PlayerState } from './hooks/useYouTubePlayer'
 import type { Track } from './api/types'
 import { savePlaylist, loadPlaylist } from './utils/playlistStorage'
+import { AuthButton } from './components/AuthButton'
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -189,6 +190,7 @@ function App() {
         </div>
 
         <div className="toolbar-right">
+          <AuthButton />
           <div className="track-info">
             {currentTrack ? (
               <>
