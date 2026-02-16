@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import clsx from 'clsx'
 import { SearchBar } from './components/SearchBar'
 import { YouTubePlayer } from './components/YouTubePlayer'
 import { LoadingState } from './components/LoadingState'
@@ -254,7 +255,7 @@ function App() {
         </main>
 
         {/* Queue sidebar */}
-        <aside className={`queue-sidebar ${queueOpen ? 'open' : 'closed'}`}>
+        <aside className={clsx('queue-sidebar', queueOpen ? 'open' : 'closed')}>
           <div className="queue-header">
             <span className="queue-title">&gt; TRANSMISSION_QUEUE</span>
             <span className="queue-count">[{queue.length}]</span>
@@ -263,7 +264,7 @@ function App() {
             {queue.map((track, index) => (
               <div
                 key={track.id}
-                className={`queue-item ${currentTrack?.id === track.id ? 'active' : ''}`}
+                className={clsx('queue-item', currentTrack?.id === track.id && 'active')}
                 onClick={() => playTrack(track, index)}
               >
                 <div className="queue-item-number">

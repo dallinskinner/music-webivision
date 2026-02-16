@@ -3,6 +3,7 @@
  */
 
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 import styles from './LoadingState.module.css';
 
 interface LoadingStateProps {
@@ -57,7 +58,7 @@ export function LoadingState({ message, steps = DEFAULT_MESSAGES }: LoadingState
             {steps.map((step, index) => (
               <div
                 key={index}
-                className={`${styles.loadingStep} ${index === currentStep ? styles.active : ''} ${index < currentStep ? styles.completed : ''}`}
+                className={clsx(styles.loadingStep, index === currentStep && styles.active, index < currentStep && styles.completed)}
               >
                 {index < currentStep ? '✓' : index === currentStep ? '▸' : '○'} {step}
               </div>

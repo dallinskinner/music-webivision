@@ -3,6 +3,7 @@
  */
 
 import { useState, useRef, useEffect } from 'react';
+import clsx from 'clsx';
 import type { KeyboardEvent } from 'react';
 import { useArtistSearch } from '../hooks/useArtistSearch';
 import styles from './SearchBar.module.css';
@@ -134,7 +135,7 @@ export function SearchBar({ onArtistSelect, disabled = false }: SearchBarProps) 
             suggestions.map((artist, index) => (
               <div
                 key={artist.mbid || artist.name}
-                className={`${styles.searchDropdownItem} ${index === selectedIndex ? styles.selected : ''}`}
+                className={clsx(styles.searchDropdownItem, index === selectedIndex && styles.selected)}
                 onClick={() => handleSelectArtist(artist.name)}
                 onMouseEnter={() => setSelectedIndex(index)}
               >
