@@ -5,7 +5,7 @@
 import { useState, useRef, useEffect } from 'react';
 import type { KeyboardEvent } from 'react';
 import { useArtistSearch } from '../hooks/useArtistSearch';
-import './SearchBar.css';
+import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
   onArtistSelect: (artistName: string) => void;
@@ -96,11 +96,11 @@ export function SearchBar({ onArtistSelect, disabled = false }: SearchBarProps) 
   }, [selectedIndex]);
 
   return (
-    <div className="search-bar-container">
+    <div className={styles.searchBarContainer}>
       <input
         ref={inputRef}
         type="text"
-        className="search-bar"
+        className={styles.searchBar}
         placeholder="SEARCH ARTIST..."
         value={query}
         onChange={(e) => handleInputChange(e.target.value)}
@@ -110,21 +110,21 @@ export function SearchBar({ onArtistSelect, disabled = false }: SearchBarProps) 
       />
 
       {showDropdown && (
-        <div ref={dropdownRef} className="search-dropdown">
+        <div ref={dropdownRef} className={styles.searchDropdown}>
           {isLoading && (
-            <div className="search-dropdown-item search-loading">
-              <span className="loading-spinner">◐</span> SEARCHING...
+            <div className={`${styles.searchDropdownItem} ${styles.searchLoading}`}>
+              <span className={styles.loadingSpinner}>◐</span> SEARCHING...
             </div>
           )}
 
           {error && (
-            <div className="search-dropdown-item search-error">
+            <div className={`${styles.searchDropdownItem} ${styles.searchError}`}>
               ⚠ {error}
             </div>
           )}
 
           {!isLoading && !error && suggestions.length === 0 && query.trim() && (
-            <div className="search-dropdown-item search-no-results">
+            <div className={`${styles.searchDropdownItem} ${styles.searchNoResults}`}>
               NO RESULTS FOUND
             </div>
           )}
@@ -134,13 +134,13 @@ export function SearchBar({ onArtistSelect, disabled = false }: SearchBarProps) 
             suggestions.map((artist, index) => (
               <div
                 key={artist.mbid || artist.name}
-                className={`search-dropdown-item ${index === selectedIndex ? 'selected' : ''}`}
+                className={`${styles.searchDropdownItem} ${index === selectedIndex ? styles.selected : ''}`}
                 onClick={() => handleSelectArtist(artist.name)}
                 onMouseEnter={() => setSelectedIndex(index)}
               >
-                <div className="artist-info">
-                  <div className="artist-name">{artist.name}</div>
-                  <div className="artist-listeners">
+                <div className={styles.artistInfo}>
+                  <div className={styles.artistName}>{artist.name}</div>
+                  <div className={styles.artistListeners}>
                     {parseInt(artist.listeners).toLocaleString()} listeners
                   </div>
                 </div>

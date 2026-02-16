@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import './LoadingState.css';
+import styles from './LoadingState.module.css';
 
 interface LoadingStateProps {
   message?: string;
@@ -44,20 +44,20 @@ export function LoadingState({ message, steps = DEFAULT_MESSAGES }: LoadingState
   }, []);
 
   return (
-    <div className="loading-overlay">
-      <div className="loading-content">
-        <div className="loading-spinner-large">◐</div>
+    <div className={styles.loadingOverlay}>
+      <div className={styles.loadingContent}>
+        <div className={styles.loadingSpinnerLarge}>◐</div>
 
         {message && (
-          <div className="loading-message">{message}{dots}</div>
+          <div className={styles.loadingMessage}>{message}{dots}</div>
         )}
 
         {steps.length > 0 && (
-          <div className="loading-steps">
+          <div className={styles.loadingSteps}>
             {steps.map((step, index) => (
               <div
                 key={index}
-                className={`loading-step ${index === currentStep ? 'active' : ''} ${index < currentStep ? 'completed' : ''}`}
+                className={`${styles.loadingStep} ${index === currentStep ? styles.active : ''} ${index < currentStep ? styles.completed : ''}`}
               >
                 {index < currentStep ? '✓' : index === currentStep ? '▸' : '○'} {step}
               </div>
@@ -65,8 +65,8 @@ export function LoadingState({ message, steps = DEFAULT_MESSAGES }: LoadingState
           </div>
         )}
 
-        <div className="loading-progress">
-          <div className="loading-progress-bar"></div>
+        <div className={styles.loadingProgress}>
+          <div className={styles.loadingProgressBar}></div>
         </div>
       </div>
     </div>

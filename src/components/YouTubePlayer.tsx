@@ -4,7 +4,7 @@
 
 import { useEffect, useCallback, useRef } from 'react';
 import { useYouTubePlayer, PlayerState } from '../hooks/useYouTubePlayer';
-import './YouTubePlayer.css';
+import styles from './YouTubePlayer.module.css';
 
 interface YouTubePlayerProps {
   videoId: string;
@@ -56,8 +56,8 @@ export function YouTubePlayer({
   }, [videoId, isReady, loadVideo, play, autoplay]);
 
   return (
-    <div className="youtube-player-container">
-      <div id={PLAYER_ID} className="youtube-player"></div>
+    <div className={styles.youtubePlayerContainer}>
+      <div id={PLAYER_ID} className={styles.youtubePlayer}></div>
     </div>
   );
 }

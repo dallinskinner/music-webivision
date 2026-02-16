@@ -1,28 +1,28 @@
 'use client';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
-import './AuthButton.css';
+import styles from './AuthButton.module.css';
 
 export function AuthButton() {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
     return (
-      <div className="auth-btn-wrap">
-        <span className="auth-loading">...</span>
+      <div className={styles.authBtnWrap}>
+        <span className={styles.authLoading}>...</span>
       </div>
     );
   }
 
   if (session?.user) {
     return (
-      <div className="auth-btn-wrap">
-        <span className="auth-user">
-          <span className="auth-bracket">[</span>
+      <div className={styles.authBtnWrap}>
+        <span className={styles.authUser}>
+          <span className={styles.authBracket}>[</span>
           {session.user.name?.toUpperCase() ?? 'USER'}
-          <span className="auth-bracket">]</span>
+          <span className={styles.authBracket}>]</span>
         </span>
-        <button className="auth-btn auth-disconnect" onClick={() => signOut()}>
+        <button className={`${styles.authBtn} ${styles.authDisconnect}`} onClick={() => signOut()}>
           DISCONNECT
         </button>
       </div>
@@ -30,11 +30,11 @@ export function AuthButton() {
   }
 
   return (
-    <div className="auth-btn-wrap">
-      <button className="auth-btn auth-connect" onClick={() => signIn('google')}>
-        <span className="auth-bracket">[</span>
+    <div className={styles.authBtnWrap}>
+      <button className={styles.authBtn} onClick={() => signIn('google')}>
+        <span className={styles.authBracket}>[</span>
         CONNECT
-        <span className="auth-bracket">]</span>
+        <span className={styles.authBracket}>]</span>
       </button>
     </div>
   );
