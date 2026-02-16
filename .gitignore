@@ -3,4 +3,5 @@ node_modules
 *.local
 .env
 .next
+.claude/settings.local.json
 data/
