@@ -54,6 +54,13 @@ function App() {
     }
   }, [queue, currentTrackIndex, currentArtistName])
 
+  // Update document title based on current artist
+  useEffect(() => {
+    document.title = currentArtistName
+      ? `vidstream.exe ${currentArtistName}`
+      : 'vidstream.exe'
+  }, [currentArtistName])
+
   const playTrack = useCallback((track: Track, index: number) => {
     setCurrentTrack(track)
     setCurrentTrackIndex(index)

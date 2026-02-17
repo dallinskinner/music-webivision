@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import '../App.css'
 
 export const metadata: Metadata = {
-  title: 'CYBER_MTV - Music Video Player',
+  title: 'vidstream.exe',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
