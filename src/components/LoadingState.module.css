@@ -4,12 +4,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(26, 26, 24, 0.97);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  backdrop-filter: blur(4px);
 }
 
 .loadingContent {
@@ -23,7 +22,7 @@
 
 .loadingSpinnerLarge {
   font-size: 48px;
-  color: #00ffcc;
+  color: var(--accent);
   animation: spin 1s linear infinite;
 }
 
@@ -37,9 +36,9 @@
 }
 
 .loadingMessage {
-  font-family: 'Courier New', monospace;
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 18px;
-  color: #00ffcc;
+  color: var(--text);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -54,42 +53,30 @@
 }
 
 .loadingStep {
-  font-family: 'Courier New', monospace;
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 14px;
-  color: #00ffcc40;
+  color: var(--text-dim);
   padding: 8px 12px;
-  border-left: 2px solid #00ffcc20;
-  transition: all 0.3s;
+  border-left: 2px solid var(--border);
+  transition: all 0.2s;
 }
 
 .loadingStep.active {
-  color: #00ffcc;
-  border-left-color: #00ffcc;
-  background: #00ffcc10;
-  animation: pulse 1.5s ease-in-out infinite;
+  color: var(--accent);
+  border-left-color: var(--accent);
 }
 
 .loadingStep.completed {
-  color: #00ffcc80;
-  border-left-color: #00ffcc80;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
+  color: var(--text-mid);
+  border-left-color: var(--text-mid);
 }
 
 .loadingProgress {
   width: 100%;
-  height: 2px;
-  background: #00ffcc20;
+  height: 1px;
+  background: var(--border);
   position: relative;
   overflow: hidden;
-  border-radius: 1px;
 }
 
 .loadingProgressBar {
@@ -98,7 +85,7 @@
   left: 0;
   height: 100%;
   width: 30%;
-  background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+  background: var(--accent);
   animation: progress 1.5s ease-in-out infinite;
 }
 
