@@ -197,14 +197,6 @@ function App() {
           >
             <span>{isFullscreen ? '⊡' : '⊞'}</span>
           </button>
-          <button
-            className="control-btn eject-btn"
-            onClick={handleEject}
-            disabled={queue.length === 0 && !currentTrack}
-            title="Eject"
-          >
-            <span>⏏</span>
-          </button>
         </div>
 
         <div className="transport-divider"></div>
@@ -232,6 +224,14 @@ function App() {
         <button className="queue-toggle" onClick={() => setQueueOpen(!queueOpen)}>
           <span className="queue-icon">{queueOpen ? '▶' : '◀'}</span>
           <span className="queue-label">QUEUE</span>
+        </button>
+        <button
+          className="control-btn eject-btn"
+          onClick={handleEject}
+          disabled={queue.length === 0 && !currentTrack}
+          title="Eject"
+        >
+          <span>⏏</span>
         </button>
       </nav>
 
