@@ -88,21 +88,32 @@ body {
   100% { transform: translate(2px, -2px); }
 }
 
-/* Toolbar */
-.toolbar {
+/* Primary Toolbar — logo + auth */
+.toolbar-primary {
   background: var(--black);
-  border-bottom: 2px solid var(--accent);
-  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--grey);
+  padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  box-shadow: 0 0 20px rgba(98, 144, 152, 0.3);
   position: relative;
   z-index: 100;
 }
 
-.toolbar::after {
+/* Transport Bar — controls, search, now playing, queue */
+.toolbar-transport {
+  background: var(--grey-darker);
+  border-bottom: 2px solid var(--accent);
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(98, 144, 152, 0.3);
+}
+
+.toolbar-transport::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -113,17 +124,11 @@ body {
   filter: blur(4px);
 }
 
-.toolbar-left {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex: 1;
-}
-
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.transport-divider {
+  width: 1px;
+  height: 1.5rem;
+  background: var(--grey);
+  flex-shrink: 0;
 }
 
 .logo {

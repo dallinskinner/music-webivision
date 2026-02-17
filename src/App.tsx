@@ -145,71 +145,76 @@ function App() {
         />
       )}
 
-      {/* Toolbar */}
-      <header className="toolbar">
-        <div className="toolbar-left">
-          <div className="logo">
-            <span className="logo-bracket">[</span>
-            <span className="logo-text">CYBER_MTV</span>
-            <span className="logo-bracket">]</span>
-          </div>
-          <SearchBar
-            onArtistSelect={handleArtistSelect}
-            disabled={isLoadingPlaylist}
-          />
-          <div className="controls">
-            <button
-              className="control-btn"
-              onClick={playPreviousTrack}
-              disabled={queue.length === 0}
-            >
-              <span>◄◄</span>
-            </button>
-            <button
-              className="control-btn play-btn"
-              onClick={togglePlay}
-              disabled={!currentTrack}
-            >
-              <span>{isPlaying ? '▮▮' : '►'}</span>
-            </button>
-            <button
-              className="control-btn"
-              onClick={playNextTrack}
-              disabled={queue.length === 0}
-            >
-              <span>►►</span>
-            </button>
-            <button
-              className="control-btn fullscreen-btn"
-              onClick={toggleFullscreen}
-              disabled={!currentTrack}
-              title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-            >
-              <span>{isFullscreen ? '⊡' : '⊞'}</span>
-            </button>
-          </div>
+      {/* Primary toolbar — logo + auth */}
+      <header className="toolbar-primary">
+        <div className="logo">
+          <span className="logo-bracket">[</span>
+          <span className="logo-text">CYBER_MTV</span>
+          <span className="logo-bracket">]</span>
         </div>
+        <AuthButton />
+      </header>
 
-        <div className="toolbar-right">
-          <AuthButton />
-          <div className="track-info">
-            {currentTrack ? (
-              <>
-                <div className="track-artist">{currentTrack.artist}</div>
-                <div className="track-divider">//</div>
-                <div className="track-title">{currentTrack.title}</div>
-              </>
-            ) : (
-              <div className="track-empty">NO_SIGNAL</div>
-            )}
-          </div>
-
-          <button className="queue-toggle" onClick={() => setQueueOpen(!queueOpen)}>
-            <span className="queue-icon">{queueOpen ? '▶' : '◀'}</span>
-            <span className="queue-label">QUEUE</span>
+      {/* Transport bar — controls, search, now playing, queue */}
+      <nav className="toolbar-transport">
+        <div className="controls">
+          <button
+            className="control-btn"
+            onClick={playPreviousTrack}
+            disabled={queue.length === 0}
+          >
+            <span>◄◄</span>
+          </button>
+          <button
+            className="control-btn play-btn"
+            onClick={togglePlay}
+            disabled={!currentTrack}
+          >
+            <span>{isPlaying ? '▮▮' : '►'}</span>
+          </button>
+          <button
+            className="control-btn"
+            onClick={playNextTrack}
+            disabled={queue.length === 0}
+          >
+            <span>►►</span>
+          </button>
+          <button
+            className="control-btn fullscreen-btn"
+            onClick={toggleFullscreen}
+            disabled={!currentTrack}
+            title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          >
+            <span>{isFullscreen ? '⊡' : '⊞'}</span>
           </button>
         </div>
-      </header>
+
+        <div className="transport-divider"></div>
+
+        <SearchBar
+          onArtistSelect={handleArtistSelect}
+          disabled={isLoadingPlaylist}
+        />
+
+        <div className="transport-divider"></div>
+
+        <div className="track-info">
+          {currentTrack ? (
+            <>
+              <div className="track-artist">{currentTrack.artist}</div>
+              <div className="track-divider">//</div>
+              <div className="track-title">{currentTrack.title}</div>
+            </>
+          ) : (
+            <div className="track-empty">NO_SIGNAL</div>
+          )}
+        </div>
+
+        <button className="queue-toggle" onClick={() => setQueueOpen(!queueOpen)}>
+          <span className="queue-icon">{queueOpen ? '▶' : '◀'}</span>
+          <span className="queue-label">QUEUE</span>
+        </button>
+      </nav>
 
       {/* Error banner */}
       {apiError && (
