@@ -261,19 +261,10 @@ function App() {
           ) : (
             <div className="no-signal">
               <div className="no-signal-content">
-                <div className="signal-icon">
-                  <div className="signal-bars">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </div>
                 <h2 className="no-signal-text">
                   <span className="glitch" data-text="SIGNAL_LOST">SIGNAL_LOST</span>
                 </h2>
                 <p className="no-signal-sub">SEARCH FOR AN ARTIST TO INITIATE BROADCAST</p>
-                <div className="terminal-cursor">_</div>
               </div>
             </div>
           )}
