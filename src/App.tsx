@@ -159,7 +159,7 @@ function App() {
       <header className="toolbar-primary">
         <div className="logo">
           <span className="logo-bracket">[</span>
-          <span className="logo-text">CYBER_MTV</span>
+          <span className="logo-text">vidstream.exe</span>
           <span className="logo-bracket">]</span>
         </div>
         <AuthButton />
