@@ -2,9 +2,13 @@
  * YouTube iframe player component
  */
 
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef, forwardRef, useImperativeHandle } from 'react';
 import { useYouTubePlayer, PlayerState } from '../hooks/useYouTubePlayer';
 import styles from './YouTubePlayer.module.css';
+
+export interface YouTubePlayerHandle {
+  getCurrentTime: () => number
+}
 
 interface YouTubePlayerProps {
   videoId: string;
@@ -17,14 +21,14 @@ interface YouTubePlayerProps {
 
 const PLAYER_ID = 'youtube-player';
 
-export function YouTubePlayer({
+export const YouTubePlayer = forwardRef<YouTubePlayerHandle, YouTubePlayerProps>(function YouTubePlayer({
   videoId,
   isPlaying,
   onStateChange,
   onError,
   onReady,
   autoplay = true,
-}: YouTubePlayerProps) {
+}, ref) {
   const previousVideoIdRef = useRef<string | null>(null);
 
   const handleError = useCallback(
@@ -35,11 +39,15 @@ export function YouTubePlayer({
     [onError]
   );
 
-  const { isReady, loadVideo, play, pause } = useYouTubePlayer(PLAYER_ID, {
+  const { isReady, loadVideo, play, pause, getCurrentTime } = useYouTubePlayer(PLAYER_ID, {
     onStateChange,
     onError: handleError,
     onReady,
   });
+
+  useImperativeHandle(ref, () => ({
+    getCurrentTime,
+  }), [getCurrentTime]);
 
   // Load video when videoId changes
   useEffect(() => {
@@ -73,4 +81,4 @@ export function YouTubePlayer({
       <div id={PLAYER_ID} className={styles.youtubePlayer}></div>
     </div>
   );
-}
+})

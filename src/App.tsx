@@ -1,7 +1,8 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { SearchBar } from './components/SearchBar'
 import { YouTubePlayer } from './components/YouTubePlayer'
+import type { YouTubePlayerHandle } from './components/YouTubePlayer'
 import { LoadingState } from './components/LoadingState'
 import { usePlaylistBuilder } from './hooks/usePlaylistBuilder'
 import { PlayerState } from './hooks/useYouTubePlayer'
@@ -19,21 +20,26 @@ function App() {
   const [currentArtistName, setCurrentArtistName] = useState<string>('')
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [vhsTime, setVhsTime] = useState('00:00:00')
+  const playerRef = useRef<YouTubePlayerHandle>(null)
 
   const { buildPlaylist, isLoading: isLoadingPlaylist } = usePlaylistBuilder()
 
-  // VHS timestamp counter
+  // Poll YouTube player for current time
   useEffect(() => {
-    const start = Date.now()
+    if (!currentTrack) {
+      setVhsTime('00:00:00')
+      return
+    }
+
     const interval = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - start) / 1000)
-      const h = String(Math.floor(elapsed / 3600)).padStart(2, '0')
-      const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0')
-      const s = String(elapsed % 60).padStart(2, '0')
+      const seconds = Math.floor(playerRef.current?.getCurrentTime() ?? 0)
+      const h = String(Math.floor(seconds / 3600)).padStart(2, '0')
+      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0')
+      const s = String(seconds % 60).padStart(2, '0')
       setVhsTime(`${h}:${m}:${s}`)
-    }, 1000)
+    }, 500)
     return () => clearInterval(interval)
-  }, [])
+  }, [currentTrack])
 
   // Track fullscreen state changes
   useEffect(() => {
@@ -211,7 +217,7 @@ function App() {
             <span>►►</span>
           </button>
           <button
-            className="control-btn fullscreen-btn"
+            className="control-btn"
             onClick={toggleFullscreen}
             disabled={!currentTrack}
             title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
@@ -220,15 +226,11 @@ function App() {
           </button>
         </div>
 
-        <div className="transport-divider"></div>
-
         <SearchBar
           key={currentArtistName}
           onArtistSelect={handleArtistSelect}
           disabled={isLoadingPlaylist}
         />
-
-        <div className="transport-divider"></div>
 
         <div className="track-info">
           {currentTrack ? (
@@ -242,18 +244,20 @@ function App() {
           )}
         </div>
 
-        <button className="queue-toggle" onClick={() => setQueueOpen(!queueOpen)}>
-          <span className="queue-icon">{queueOpen ? '▶' : '◀'}</span>
-          <span className="queue-label">QUEUE</span>
-        </button>
-        <button
-          className="control-btn eject-btn"
-          onClick={handleEject}
-          disabled={queue.length === 0 && !currentTrack}
-          title="Eject"
-        >
-          <span>⏏</span>
-        </button>
+        <div className="controls">
+          <button className="control-btn" onClick={() => setQueueOpen(!queueOpen)}>
+            <span>{queueOpen ? '▶' : '◀'}</span>
+            <span>QUEUE</span>
+          </button>
+          <button
+            className="control-btn"
+            onClick={handleEject}
+            disabled={queue.length === 0 && !currentTrack}
+            title="Eject"
+          >
+            <span>⏏</span>
+          </button>
+        </div>
       </nav>
 
       {/* Error banner */}
@@ -273,6 +277,7 @@ function App() {
         <main className="video-area">
           {currentTrack ? (
             <YouTubePlayer
+              ref={playerRef}
               videoId={currentTrack.videoId}
               isPlaying={isPlaying}
               onStateChange={handlePlayerStateChange}
@@ -290,9 +295,18 @@ function App() {
             </div>
           )}
           <div className="vhs-overlay">
-            <div className="vhs-rec">
-              <span className="vhs-rec-dot"></span>
-              <span>REC</span>
+            <div className="vhs-status">
+              {isPlaying ? (
+                <>
+                  <span className="vhs-status-icon">►</span>
+                  <span>PLAY</span>
+                </>
+              ) : (
+                <>
+                  <span className="vhs-status-icon">■</span>
+                  <span>STOP</span>
+                </>
+              )}
             </div>
             <div className="vhs-sp">SP</div>
             <div className="vhs-timestamp">{vhsTime}</div>

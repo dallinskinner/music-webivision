@@ -120,7 +120,7 @@ body {
   opacity: 0.7;
 }
 
-.vhs-rec {
+.vhs-status {
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
@@ -135,19 +135,8 @@ body {
   opacity: 0.7;
 }
 
-.vhs-rec-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: var(--white);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--white);
-  animation: rec-blink 1.5s step-end infinite;
-}
-
-@keyframes rec-blink {
-  0%, 60% { opacity: 1; }
-  61%, 100% { opacity: 0; }
+.vhs-status-icon {
+  font-size: 0.75rem;
 }
 
 .vhs-sp {
@@ -190,13 +179,6 @@ body {
   display: none;
 }
 
-.transport-divider {
-  width: 2px;
-  height: 1.5rem;
-  background: var(--white);
-  flex-shrink: 0;
-}
-
 .logo {
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1.25rem;
@@ -225,11 +207,15 @@ body {
   background: transparent;
   border: 2px solid var(--white);
   color: var(--white);
-  padding: 0.5rem 1rem;
+  height: 36px;
+  padding: 0 1rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .control-btn:hover:not(:disabled) {
@@ -245,26 +231,12 @@ body {
 .play-btn {
   background: var(--white);
   color: var(--ikb);
-  padding: 0.5rem 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .play-btn:hover:not(:disabled) {
   background: transparent;
   color: var(--white);
-}
-
-.fullscreen-btn {
-  margin-left: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.eject-btn {
-  margin-left: 0.5rem;
-}
-
-.eject-btn:hover:not(:disabled) {
-  background: var(--white);
-  color: var(--ikb);
 }
 
 .track-info {
@@ -306,23 +278,6 @@ body {
   51%, 100% { opacity: 0.2; }
 }
 
-.queue-toggle {
-  background: transparent;
-  border: 2px solid var(--white);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  font-family: 'Terminal Grotesque', monospace;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background 0.1s;
-}
-
-.queue-toggle:hover {
-  background: var(--white);
-  color: var(--ikb);
-}
 
 /* === Error Banner === */
 .error-banner {
