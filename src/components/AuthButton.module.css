@@ -6,12 +6,12 @@
 }
 
 .authLoading {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
   letter-spacing: 2px;
 }
 
 .authUser {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
   font-size: 0.85rem;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -19,32 +19,32 @@
 }
 
 .authBracket {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
 }
 
 .authBtn {
   background: transparent;
-  border: 1px solid var(--vhs-blue-dark);
-  color: var(--vhs-white-dim);
+  border: 2px solid var(--white);
+  color: var(--white);
   padding: 0.4rem 0.75rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.8rem;
   letter-spacing: 1px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: color 0.15s, border-color 0.15s;
+  transition: background 0.1s;
 }
 
 .authBtn:hover {
-  color: var(--vhs-white);
-  border-color: var(--vhs-blue-light);
+  background: var(--white);
+  color: var(--ikb);
 }
 
 .authDisconnect {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
   font-size: 0.7rem;
 }
 
 .authDisconnect:hover {
-  color: var(--vhs-white-dim);
+  color: var(--white);
 }

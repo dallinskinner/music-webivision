@@ -167,11 +167,11 @@ function App() {
       {/* Loading overlay */}
       {isLoadingPlaylist && (
         <LoadingState
-          message="INITIALIZING TRANSMISSION..."
+          message="LOADING"
           steps={[
-            '> SCANNING ARTIST DATABASE...',
-            '> LOCATING VIDEO TRANSMISSIONS...',
-            '> COMPILING BROADCAST QUEUE...',
+            'SCANNING ARTISTS',
+            'FINDING VIDEOS',
+            'BUILDING QUEUE',
           ]}
         />
       )}
@@ -238,7 +238,7 @@ function App() {
               <div className="track-title">{currentTrack.title}</div>
             </>
           ) : (
-            <div className="track-empty">NO_SIGNAL</div>
+            <div className="track-empty">NO SIGNAL</div>
           )}
         </div>
 
@@ -283,9 +283,9 @@ function App() {
             <div className="no-signal">
               <div className="no-signal-content">
                 <h2 className="no-signal-text">
-                  <span className="glitch" data-text="SIGNAL_LOST">SIGNAL_LOST</span>
+                  <span className="glitch" data-text="NO SIGNAL">NO SIGNAL</span>
                 </h2>
-                <p className="no-signal-sub">SEARCH FOR AN ARTIST TO INITIATE BROADCAST</p>
+                <p className="no-signal-sub">SEARCH FOR AN ARTIST TO BEGIN</p>
               </div>
             </div>
           )}
@@ -302,7 +302,7 @@ function App() {
         {/* Queue sidebar */}
         <aside className={clsx('queue-sidebar', { 'open': queueOpen, 'closed': !queueOpen })}>
           <div className="queue-header">
-            <span className="queue-title">&gt; TRANSMISSION_QUEUE</span>
+            <span className="queue-title">QUEUE</span>
             <span className="queue-count">[{queue.length}]</span>
           </div>
           <div className="queue-list">

@@ -11,14 +11,12 @@
 }
 
 :root {
-  --vhs-blue: #0000aa;
-  --vhs-blue-dark: #000066;
-  --vhs-blue-darker: #000033;
-  --vhs-blue-light: #3333cc;
-  --vhs-blue-bright: #5555ff;
-  --vhs-white: #ffffff;
-  --vhs-white-dim: #8888cc;
-  --vhs-white-ghost: #4444aa;
+  --ikb: #002FA7;
+  --ikb-dark: #001E6E;
+  --ikb-glow: #3366FF;
+  --white: #ffffff;
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-20: rgba(255, 255, 255, 0.2);
 }
 
 * {
@@ -29,8 +27,8 @@
 
 body {
   font-family: 'Terminal Grotesque', monospace;
-  background: var(--vhs-blue-darker);
-  color: var(--vhs-white);
+  background: var(--ikb);
+  color: var(--white);
   overflow: hidden;
 }
 
@@ -40,7 +38,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  background: var(--vhs-blue-darker);
+  background: var(--ikb);
 }
 
 /* === CRT effects — scoped to video area only === */
@@ -61,8 +59,8 @@ body {
   z-index: 10;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
     transparent 1px,
     transparent 3px
   );
@@ -83,9 +81,9 @@ body {
       0deg,
       transparent 0%,
       transparent 48%,
-      rgba(85, 85, 255, 0.08) 49%,
+      rgba(51, 102, 255, 0.08) 49%,
       rgba(255, 255, 255, 0.04) 50%,
-      rgba(85, 85, 255, 0.08) 51%,
+      rgba(51, 102, 255, 0.08) 51%,
       transparent 52%,
       transparent 100%
     );
@@ -114,12 +112,11 @@ body {
   right: 1.5rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1.1rem;
-  color: var(--vhs-white);
+  color: var(--white);
   letter-spacing: 2px;
   text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.8),
-    2px 0 0 rgba(85, 85, 255, 0.4),
-    -2px 0 0 rgba(255, 255, 255, 0.2);
+    0 0 8px rgba(255, 255, 255, 0.6),
+    2px 0 0 rgba(51, 102, 255, 0.4);
   opacity: 0.7;
 }
 
@@ -129,12 +126,12 @@ body {
   left: 1.5rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1rem;
-  color: var(--vhs-white);
+  color: var(--white);
   letter-spacing: 3px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
   opacity: 0.7;
 }
 
@@ -142,9 +139,9 @@ body {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: var(--vhs-white);
+  background: var(--white);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--vhs-white);
+  box-shadow: 0 0 8px var(--white);
   animation: rec-blink 1.5s step-end infinite;
 }
 
@@ -159,16 +156,16 @@ body {
   right: 1.5rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.9rem;
-  color: var(--vhs-white);
+  color: var(--white);
   letter-spacing: 2px;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
   opacity: 0.5;
 }
 
-/* === Primary Toolbar — clean, flat === */
+/* === Primary Toolbar — brutalist === */
 .toolbar-primary {
-  background: var(--vhs-blue-darker);
-  border-bottom: 1px solid var(--vhs-blue-dark);
+  background: var(--ikb);
+  border-bottom: 2px solid var(--white);
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
@@ -177,10 +174,10 @@ body {
   z-index: 100;
 }
 
-/* === Transport Bar — clean, flat === */
+/* === Transport Bar — brutalist === */
 .toolbar-transport {
-  background: var(--vhs-blue-darker);
-  border-bottom: 1px solid var(--vhs-blue-dark);
+  background: var(--ikb);
+  border-bottom: 2px solid var(--white);
   padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
@@ -194,9 +191,9 @@ body {
 }
 
 .transport-divider {
-  width: 1px;
+  width: 2px;
   height: 1.5rem;
-  background: var(--vhs-blue-dark);
+  background: var(--white);
   flex-shrink: 0;
 }
 
@@ -205,17 +202,18 @@ body {
   font-size: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0;
   font-weight: bold;
 }
 
 .logo-bracket {
-  color: var(--vhs-white-ghost);
+  display: none;
 }
 
 .logo-text {
-  color: var(--vhs-white);
-  letter-spacing: 2px;
+  color: var(--white);
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .controls {
@@ -225,18 +223,18 @@ body {
 
 .control-btn {
   background: transparent;
-  border: 1px solid var(--vhs-blue-dark);
-  color: var(--vhs-white-dim);
+  border: 2px solid var(--white);
+  color: var(--white);
   padding: 0.5rem 1rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1rem;
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
+  transition: background 0.1s;
 }
 
 .control-btn:hover:not(:disabled) {
-  color: var(--vhs-white);
-  border-color: var(--vhs-blue-light);
+  background: var(--white);
+  color: var(--ikb);
 }
 
 .control-btn:disabled {
@@ -245,13 +243,14 @@ body {
 }
 
 .play-btn {
-  border-color: var(--vhs-blue-light);
-  color: var(--vhs-white);
+  background: var(--white);
+  color: var(--ikb);
   padding: 0.5rem 1.5rem;
 }
 
 .play-btn:hover:not(:disabled) {
-  border-color: var(--vhs-white-dim);
+  background: transparent;
+  color: var(--white);
 }
 
 .fullscreen-btn {
@@ -264,8 +263,8 @@ body {
 }
 
 .eject-btn:hover:not(:disabled) {
-  color: var(--vhs-white);
-  border-color: var(--vhs-white-dim);
+  background: var(--white);
+  color: var(--ikb);
 }
 
 .track-info {
@@ -277,7 +276,7 @@ body {
 }
 
 .track-artist {
-  color: var(--vhs-white);
+  color: var(--white);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -287,18 +286,18 @@ body {
 }
 
 .track-divider {
-  color: var(--vhs-blue-dark);
+  color: var(--white-50);
 }
 
 .track-title {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .track-empty {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
   animation: blink 1.5s step-end infinite;
 }
 
@@ -309,26 +308,26 @@ body {
 
 .queue-toggle {
   background: transparent;
-  border: 1px solid var(--vhs-blue-dark);
-  color: var(--vhs-white-dim);
+  border: 2px solid var(--white);
+  color: var(--white);
   padding: 0.5rem 1rem;
   font-family: 'Terminal Grotesque', monospace;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: color 0.15s, border-color 0.15s;
+  transition: background 0.1s;
 }
 
 .queue-toggle:hover {
-  color: var(--vhs-white);
-  border-color: var(--vhs-blue-light);
+  background: var(--white);
+  color: var(--ikb);
 }
 
-/* === Error Banner — flat === */
+/* === Error Banner === */
 .error-banner {
-  background: var(--vhs-blue-darker);
-  border-bottom: 1px solid var(--vhs-white-dim);
+  background: var(--white);
+  border-bottom: 2px solid var(--ikb);
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
@@ -338,33 +337,33 @@ body {
 }
 
 .error-icon {
-  color: var(--vhs-white);
+  color: var(--ikb);
   font-size: 1.25rem;
 }
 
 .error-message {
   flex: 1;
-  color: var(--vhs-white);
+  color: var(--ikb);
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.875rem;
   letter-spacing: 1px;
 }
 
 .error-dismiss {
-  background: transparent;
-  border: 1px solid var(--vhs-white-dim);
-  color: var(--vhs-white);
+  background: var(--ikb);
+  border: 2px solid var(--ikb);
+  color: var(--white);
   padding: 0.25rem 0.75rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.75rem;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.1s;
   letter-spacing: 1px;
 }
 
 .error-dismiss:hover {
-  background: var(--vhs-white);
-  color: var(--vhs-blue-darker);
+  background: transparent;
+  color: var(--ikb);
 }
 
 /* === Main Container === */
@@ -377,7 +376,7 @@ body {
 /* === Video Area — all CRT/VHS effects live here === */
 .video-area {
   flex: 1;
-  background: var(--vhs-blue-darker);
+  background: var(--ikb);
   position: relative;
   display: flex;
   align-items: center;
@@ -406,7 +405,7 @@ body {
 .video-placeholder {
   width: 100%;
   height: 100%;
-  background: var(--vhs-blue-darker);
+  background: var(--ikb);
   position: relative;
   overflow: hidden;
 }
@@ -422,8 +421,8 @@ body {
       0deg,
       transparent,
       transparent 2px,
-      rgba(85, 85, 255, 0.03) 2px,
-      rgba(85, 85, 255, 0.03) 4px
+      rgba(255, 255, 255, 0.02) 2px,
+      rgba(255, 255, 255, 0.02) 4px
     );
   animation: static-move 0.1s linear infinite;
 }
@@ -442,7 +441,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, transparent 0%, rgba(0, 0, 50, 0.4) 100%);
+  background: transparent;
 }
 
 .now-playing {
@@ -450,30 +449,27 @@ body {
 }
 
 .np-label {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
   font-size: 0.875rem;
   margin-bottom: 1rem;
   letter-spacing: 3px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .np-artist {
   font-family: 'Terminal Grotesque', monospace;
   font-size: 3rem;
   font-weight: bold;
-  color: var(--vhs-white);
+  color: var(--white);
   margin-bottom: 0.5rem;
   text-shadow:
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 40px rgba(85, 85, 255, 0.5),
-    3px 0 0 rgba(85, 85, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.4),
+    3px 0 0 rgba(51, 102, 255, 0.3),
     -3px 0 0 rgba(200, 200, 255, 0.2);
 }
 
 .np-title {
   font-size: 1.5rem;
-  color: var(--vhs-white-dim);
-  text-shadow: 0 0 10px rgba(85, 85, 255, 0.4);
+  color: var(--white-50);
 }
 
 /* === No Signal — VHS Blue Screen === */
@@ -483,13 +479,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(
-      ellipse at center,
-      var(--vhs-blue) 0%,
-      var(--vhs-blue-dark) 50%,
-      var(--vhs-blue-darker) 100%
-    );
+  background: var(--ikb);
 }
 
 .no-signal-content {
@@ -501,12 +491,11 @@ body {
   font-size: 4rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: var(--vhs-white);
+  color: var(--white);
   text-shadow:
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 40px rgba(85, 85, 255, 0.8),
-    0 0 80px rgba(85, 85, 255, 0.4),
-    3px 0 0 rgba(85, 85, 255, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 60px rgba(51, 102, 255, 0.6),
+    3px 0 0 rgba(51, 102, 255, 0.4),
     -3px 0 0 rgba(200, 200, 255, 0.2);
 }
 
@@ -529,7 +518,7 @@ body {
 
 .glitch::before {
   left: 3px;
-  text-shadow: -3px 0 rgba(85, 85, 255, 0.7);
+  text-shadow: -3px 0 rgba(51, 102, 255, 0.7);
   clip: rect(24px, 550px, 90px, 0);
   animation: vhs-glitch-blue 4s infinite linear alternate-reverse;
   color: transparent;
@@ -546,41 +535,38 @@ body {
 @keyframes vhs-glitch-main {
   0%, 85% {
     text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.6),
-      0 0 40px rgba(85, 85, 255, 0.8),
-      0 0 80px rgba(85, 85, 255, 0.4),
-      3px 0 0 rgba(85, 85, 255, 0.4),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(51, 102, 255, 0.6),
+      3px 0 0 rgba(51, 102, 255, 0.4),
       -3px 0 0 rgba(200, 200, 255, 0.2);
   }
   86% {
     text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.6),
-      -5px 2px 0 rgba(85, 85, 255, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      -5px 2px 0 rgba(51, 102, 255, 0.6),
       5px -2px 0 rgba(200, 200, 255, 0.3);
     transform: translate(2px, -1px);
   }
   88% {
     text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.6),
-      4px -3px 0 rgba(85, 85, 255, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      4px -3px 0 rgba(51, 102, 255, 0.6),
       -4px 3px 0 rgba(200, 200, 255, 0.3);
     transform: translate(-3px, 2px);
   }
   89% {
     transform: translate(0, 0);
     text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.6),
-      0 0 40px rgba(85, 85, 255, 0.8),
-      0 0 80px rgba(85, 85, 255, 0.4),
-      3px 0 0 rgba(85, 85, 255, 0.4),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(51, 102, 255, 0.6),
+      3px 0 0 rgba(51, 102, 255, 0.4),
       -3px 0 0 rgba(200, 200, 255, 0.2);
   }
   100% {
     text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.6),
-      0 0 40px rgba(85, 85, 255, 0.8),
-      0 0 80px rgba(85, 85, 255, 0.4),
-      3px 0 0 rgba(85, 85, 255, 0.4),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(51, 102, 255, 0.6),
+      3px 0 0 rgba(51, 102, 255, 0.4),
       -3px 0 0 rgba(200, 200, 255, 0.2);
   }
 }
@@ -604,18 +590,17 @@ body {
 }
 
 .no-signal-sub {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
   font-size: 1rem;
   letter-spacing: 2px;
   margin-bottom: 2rem;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
-/* === Queue Sidebar — clean, flat === */
+/* === Queue Sidebar — brutalist === */
 .queue-sidebar {
   width: 400px;
-  background: var(--vhs-blue-darker);
-  border-left: 1px solid var(--vhs-blue-dark);
+  background: var(--ikb);
+  border-left: 2px solid var(--white);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -635,21 +620,21 @@ body {
 
 .queue-header {
   padding: 1.5rem;
-  border-bottom: 1px solid var(--vhs-blue-dark);
+  border-bottom: 2px solid var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--vhs-blue-darker);
+  background: var(--ikb);
 }
 
 .queue-title {
-  color: var(--vhs-white-dim);
+  color: var(--white);
   font-weight: bold;
   letter-spacing: 1px;
 }
 
 .queue-count {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
   font-size: 0.875rem;
 }
 
@@ -664,11 +649,11 @@ body {
 }
 
 .queue-list::-webkit-scrollbar-track {
-  background: var(--vhs-blue-darker);
+  background: var(--ikb);
 }
 
 .queue-list::-webkit-scrollbar-thumb {
-  background: var(--vhs-blue-dark);
+  background: var(--white-50);
 }
 
 .queue-item {
@@ -676,12 +661,12 @@ body {
   margin-bottom: 0;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 102, 0.5);
+  border-bottom: 1px solid var(--white-20);
   cursor: pointer;
   display: flex;
   gap: 1rem;
   align-items: center;
-  transition: background 0.15s;
+  transition: background 0.1s;
   position: relative;
 }
 
@@ -691,37 +676,37 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 2px;
+  width: 3px;
   background: transparent;
-  transition: background 0.15s;
+  transition: background 0.1s;
 }
 
 .queue-item:hover {
-  background: rgba(85, 85, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .queue-item:hover::before {
-  background: var(--vhs-blue-light);
+  background: var(--white-50);
 }
 
 .queue-item.active {
-  background: rgba(85, 85, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .queue-item.active::before {
-  background: var(--vhs-white);
+  background: var(--white);
 }
 
 .queue-item-number {
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--vhs-blue-dark);
+  color: var(--white-20);
   min-width: 2.5rem;
 }
 
 .queue-item.active .queue-item-number {
-  color: var(--vhs-white);
+  color: var(--white);
 }
 
 .queue-item-content {
@@ -730,7 +715,7 @@ body {
 }
 
 .queue-item-artist {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
   font-size: 0.875rem;
   text-transform: uppercase;
   margin-bottom: 0.25rem;
@@ -741,11 +726,11 @@ body {
 }
 
 .queue-item.active .queue-item-artist {
-  color: var(--vhs-white);
+  color: var(--white);
 }
 
 .queue-item-title {
-  color: var(--vhs-white-ghost);
+  color: var(--white-20);
   font-size: 0.75rem;
   white-space: nowrap;
   overflow: hidden;
@@ -753,10 +738,10 @@ body {
 }
 
 .queue-item.active .queue-item-title {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
 }
 
 .queue-item-duration {
-  color: var(--vhs-white-ghost);
+  color: var(--white-20);
   font-size: 0.875rem;
 }

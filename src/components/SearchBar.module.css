@@ -8,21 +8,21 @@
   width: 100%;
   padding: 8px 12px;
   background: transparent;
-  border: 1px solid var(--vhs-blue-dark);
-  color: var(--vhs-white);
+  border: 2px solid var(--white);
+  color: var(--white);
   font-family: 'Terminal Grotesque', monospace;
   font-size: 13px;
   text-transform: uppercase;
   outline: none;
-  transition: border-color 0.15s;
+  transition: background 0.1s;
 }
 
 .searchBar::placeholder {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
 }
 
 .searchBar:focus {
-  border-color: var(--vhs-blue-light);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .searchBar:disabled {
@@ -35,8 +35,8 @@
   top: calc(100% + 2px);
   left: 0;
   right: 0;
-  background: var(--vhs-blue-darker);
-  border: 1px solid var(--vhs-blue-dark);
+  background: var(--ikb);
+  border: 2px solid var(--white);
   max-height: 400px;
   overflow-y: auto;
   z-index: 1000;
@@ -45,7 +45,7 @@
 .searchDropdownItem {
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(0, 0, 102, 0.5);
+  border-bottom: 1px solid var(--white-20);
   transition: background 0.1s;
 }
 
@@ -55,7 +55,7 @@
 
 .searchDropdownItem:hover,
 .searchDropdownItem.selected {
-  background: rgba(85, 85, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .artistInfo {
@@ -65,14 +65,14 @@
 }
 
 .artistName {
-  color: var(--vhs-white);
+  color: var(--white);
   font-family: 'Terminal Grotesque', monospace;
   font-size: 13px;
   font-weight: bold;
 }
 
 .artistListeners {
-  color: var(--vhs-white-ghost);
+  color: var(--white-50);
   font-family: 'Terminal Grotesque', monospace;
   font-size: 11px;
 }
@@ -80,7 +80,7 @@
 .searchLoading,
 .searchError,
 .searchNoResults {
-  color: var(--vhs-white-dim);
+  color: var(--white-50);
   font-family: 'Terminal Grotesque', monospace;
   font-size: 12px;
   text-align: center;
@@ -88,7 +88,7 @@
 }
 
 .searchError {
-  color: var(--vhs-white);
+  color: var(--white);
 }
 
 .loadingSpinner {
@@ -111,9 +111,9 @@
 }
 
 .searchDropdown::-webkit-scrollbar-track {
-  background: var(--vhs-blue-darker);
+  background: var(--ikb);
 }
 
 .searchDropdown::-webkit-scrollbar-thumb {
-  background: var(--vhs-blue-dark);
+  background: var(--white-50);
 }
