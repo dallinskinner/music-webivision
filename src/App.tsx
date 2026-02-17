@@ -18,8 +18,22 @@ function App() {
   const [apiError, setApiError] = useState<string | null>(null)
   const [currentArtistName, setCurrentArtistName] = useState<string>('')
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [vhsTime, setVhsTime] = useState('00:00:00')
 
   const { buildPlaylist, isLoading: isLoadingPlaylist } = usePlaylistBuilder()
+
+  // VHS timestamp counter
+  useEffect(() => {
+    const start = Date.now()
+    const interval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - start) / 1000)
+      const h = String(Math.floor(elapsed / 3600)).padStart(2, '0')
+      const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0')
+      const s = String(elapsed % 60).padStart(2, '0')
+      setVhsTime(`${h}:${m}:${s}`)
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
 
   // Track fullscreen state changes
   useEffect(() => {
@@ -146,9 +160,17 @@ function App() {
 
   return (
     <div className="app">
-      {/* Scanline overlay for CRT effect */}
+      {/* CRT / VHS overlays */}
       <div className="scanlines"></div>
       <div className="noise"></div>
+      <div className="vhs-overlay">
+        <div className="vhs-rec">
+          <span className="vhs-rec-dot"></span>
+          <span>REC</span>
+        </div>
+        <div className="vhs-sp">SP</div>
+        <div className="vhs-timestamp">{vhsTime}</div>
+      </div>
 
       {/* Loading overlay */}
       {isLoadingPlaylist && (

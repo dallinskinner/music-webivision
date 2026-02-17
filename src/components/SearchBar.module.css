@@ -7,27 +7,29 @@
 .searchBar {
   width: 100%;
   padding: 8px 12px;
-  background: #000;
-  border: 1px solid #00ffcc;
-  color: #00ffcc;
-  font-family: 'Courier New', monospace;
+  background: var(--vhs-blue-darker);
+  border: 1px solid var(--vhs-blue-bright);
+  color: var(--vhs-white);
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 13px;
   text-transform: uppercase;
   outline: none;
   transition: all 0.2s;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 }
 
 .searchBar::placeholder {
-  color: #00ffcc80;
+  color: var(--vhs-white-ghost);
+  text-shadow: none;
 }
 
 .searchBar:focus {
-  border-color: #00ffcc;
-  box-shadow: 0 0 8px #00ffcc40;
+  border-color: var(--vhs-white);
+  box-shadow: 0 0 12px rgba(85, 85, 255, 0.4);
 }
 
 .searchBar:disabled {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
@@ -36,18 +38,18 @@
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #000;
-  border: 1px solid #00ffcc;
+  background: var(--vhs-blue-dark);
+  border: 1px solid var(--vhs-blue-bright);
   max-height: 400px;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 255, 204, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 100, 0.6);
 }
 
 .searchDropdownItem {
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid #00ffcc20;
+  border-bottom: 1px solid var(--vhs-blue-darker);
   transition: all 0.15s;
 }
 
@@ -57,7 +59,7 @@
 
 .searchDropdownItem:hover,
 .searchDropdownItem.selected {
-  background: #00ffcc20;
+  background: rgba(85, 85, 255, 0.15);
 }
 
 .artistInfo {
@@ -67,30 +69,32 @@
 }
 
 .artistName {
-  color: #00ffcc;
-  font-family: 'Courier New', monospace;
+  color: var(--vhs-white);
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 13px;
   font-weight: bold;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 }
 
 .artistListeners {
-  color: #00ffcc80;
-  font-family: 'Courier New', monospace;
+  color: var(--vhs-white-ghost);
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 11px;
 }
 
 .searchLoading,
 .searchError,
 .searchNoResults {
-  color: #00ffcc;
-  font-family: 'Courier New', monospace;
+  color: var(--vhs-white-dim);
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 12px;
   text-align: center;
   cursor: default;
 }
 
 .searchError {
-  color: #ff3366;
+  color: var(--vhs-white);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 .loadingSpinner {
@@ -109,18 +113,13 @@
 
 /* Scrollbar styling */
 .searchDropdown::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .searchDropdown::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--vhs-blue-dark);
 }
 
 .searchDropdown::-webkit-scrollbar-thumb {
-  background: #00ffcc40;
-  border-radius: 4px;
-}
-
-.searchDropdown::-webkit-scrollbar-thumb:hover {
-  background: #00ffcc60;
+  background: var(--vhs-blue-light);
 }
