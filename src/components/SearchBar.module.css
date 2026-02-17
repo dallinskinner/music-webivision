@@ -7,25 +7,22 @@
 .searchBar {
   width: 100%;
   padding: 8px 12px;
-  background: var(--vhs-blue-darker);
-  border: 1px solid var(--vhs-blue-bright);
+  background: transparent;
+  border: 1px solid var(--vhs-blue-dark);
   color: var(--vhs-white);
   font-family: 'Terminal Grotesque', monospace;
   font-size: 13px;
   text-transform: uppercase;
   outline: none;
-  transition: all 0.2s;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  transition: border-color 0.15s;
 }
 
 .searchBar::placeholder {
   color: var(--vhs-white-ghost);
-  text-shadow: none;
 }
 
 .searchBar:focus {
-  border-color: var(--vhs-white);
-  box-shadow: 0 0 12px rgba(85, 85, 255, 0.4);
+  border-color: var(--vhs-blue-light);
 }
 
 .searchBar:disabled {
@@ -35,22 +32,21 @@
 
 .searchDropdown {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 2px);
   left: 0;
   right: 0;
-  background: var(--vhs-blue-dark);
-  border: 1px solid var(--vhs-blue-bright);
+  background: var(--vhs-blue-darker);
+  border: 1px solid var(--vhs-blue-dark);
   max-height: 400px;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 100, 0.6);
 }
 
 .searchDropdownItem {
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid var(--vhs-blue-darker);
-  transition: all 0.15s;
+  border-bottom: 1px solid rgba(0, 0, 102, 0.5);
+  transition: background 0.1s;
 }
 
 .searchDropdownItem:last-child {
@@ -59,7 +55,7 @@
 
 .searchDropdownItem:hover,
 .searchDropdownItem.selected {
-  background: rgba(85, 85, 255, 0.15);
+  background: rgba(85, 85, 255, 0.06);
 }
 
 .artistInfo {
@@ -73,7 +69,6 @@
   font-family: 'Terminal Grotesque', monospace;
   font-size: 13px;
   font-weight: bold;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 }
 
 .artistListeners {
@@ -94,7 +89,6 @@
 
 .searchError {
   color: var(--vhs-white);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 .loadingSpinner {
@@ -113,13 +107,13 @@
 
 /* Scrollbar styling */
 .searchDropdown::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
 }
 
 .searchDropdown::-webkit-scrollbar-track {
-  background: var(--vhs-blue-dark);
+  background: var(--vhs-blue-darker);
 }
 
 .searchDropdown::-webkit-scrollbar-thumb {
-  background: var(--vhs-blue-light);
+  background: var(--vhs-blue-dark);
 }

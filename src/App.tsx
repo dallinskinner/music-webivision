@@ -160,17 +160,9 @@ function App() {
 
   return (
     <div className="app">
-      {/* CRT / VHS overlays */}
+      {/* CRT / VHS overlays — scanlines only on video area via CSS */}
       <div className="scanlines"></div>
       <div className="noise"></div>
-      <div className="vhs-overlay">
-        <div className="vhs-rec">
-          <span className="vhs-rec-dot"></span>
-          <span>REC</span>
-        </div>
-        <div className="vhs-sp">SP</div>
-        <div className="vhs-timestamp">{vhsTime}</div>
-      </div>
 
       {/* Loading overlay */}
       {isLoadingPlaylist && (
@@ -297,6 +289,14 @@ function App() {
               </div>
             </div>
           )}
+          <div className="vhs-overlay">
+            <div className="vhs-rec">
+              <span className="vhs-rec-dot"></span>
+              <span>REC</span>
+            </div>
+            <div className="vhs-sp">SP</div>
+            <div className="vhs-timestamp">{vhsTime}</div>
+          </div>
         </main>
 
         {/* Queue sidebar */}

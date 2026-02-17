@@ -43,15 +43,22 @@ body {
   background: var(--vhs-blue-darker);
 }
 
-/* === CRT Scanlines — heavy, visible === */
-.scanlines {
-  position: fixed;
+/* === CRT effects — scoped to video area only === */
+.scanlines,
+.noise {
+  display: none;
+}
+
+/* Scanlines inside video area */
+.video-area::after {
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 10;
   background: repeating-linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.15) 0px,
@@ -61,26 +68,16 @@ body {
   );
 }
 
-/* === VHS Tracking Distortion === */
-.noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 998;
-  opacity: 1;
-  overflow: hidden;
-}
-
-.noise::before {
+/* VHS tracking distortion inside video area */
+.video-area::before {
   content: '';
   position: absolute;
   top: -100%;
   left: -10%;
   width: 120%;
   height: 300%;
+  pointer-events: none;
+  z-index: 11;
   background:
     linear-gradient(
       0deg,
@@ -95,45 +92,26 @@ body {
   animation: vhs-tracking 8s linear infinite;
 }
 
-.noise::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  animation: noise-jitter 0.15s steps(3) infinite;
-}
-
 @keyframes vhs-tracking {
   0% { transform: translateY(0); }
   100% { transform: translateY(33.33%); }
 }
 
-@keyframes noise-jitter {
-  0% { transform: translate(0, 0); }
-  33% { transform: translate(-1px, 1px); }
-  66% { transform: translate(1px, -1px); }
-  100% { transform: translate(0, 0); }
-}
-
-/* === VHS Timestamp Overlay === */
+/* === VHS Overlay — inside video area === */
 .vhs-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 997;
+  z-index: 12;
 }
 
 .vhs-timestamp {
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1.1rem;
   color: var(--vhs-white);
@@ -147,8 +125,8 @@ body {
 
 .vhs-rec {
   position: absolute;
-  top: 2rem;
-  left: 2rem;
+  top: 1.5rem;
+  left: 1.5rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1rem;
   color: var(--vhs-white);
@@ -177,8 +155,8 @@ body {
 
 .vhs-sp {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1.5rem;
+  right: 1.5rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.9rem;
   color: var(--vhs-white);
@@ -187,10 +165,10 @@ body {
   opacity: 0.5;
 }
 
-/* === Primary Toolbar === */
+/* === Primary Toolbar — clean, flat === */
 .toolbar-primary {
-  background: var(--vhs-blue-dark);
-  border-bottom: 1px solid var(--vhs-blue-light);
+  background: var(--vhs-blue-darker);
+  border-bottom: 1px solid var(--vhs-blue-dark);
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
@@ -199,35 +177,26 @@ body {
   z-index: 100;
 }
 
-/* === Transport Bar === */
+/* === Transport Bar — clean, flat === */
 .toolbar-transport {
   background: var(--vhs-blue-darker);
-  border-bottom: 2px solid var(--vhs-blue-bright);
+  border-bottom: 1px solid var(--vhs-blue-dark);
   padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 1.25rem;
   position: relative;
   z-index: 100;
-  box-shadow: 0 0 20px rgba(85, 85, 255, 0.3);
 }
 
 .toolbar-transport::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--vhs-blue-bright);
-  filter: blur(6px);
-  opacity: 0.6;
+  display: none;
 }
 
 .transport-divider {
   width: 1px;
   height: 1.5rem;
-  background: var(--vhs-blue-light);
+  background: var(--vhs-blue-dark);
   flex-shrink: 0;
 }
 
@@ -241,21 +210,12 @@ body {
 }
 
 .logo-bracket {
-  color: var(--vhs-white-dim);
-  animation: bracket-pulse 2s ease-in-out infinite;
+  color: var(--vhs-white-ghost);
 }
 
 .logo-text {
   color: var(--vhs-white);
   letter-spacing: 2px;
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.6),
-    0 0 20px rgba(85, 85, 255, 0.4);
-}
-
-@keyframes bracket-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
 }
 
 .controls {
@@ -264,21 +224,19 @@ body {
 }
 
 .control-btn {
-  background: var(--vhs-blue-darker);
-  border: 1px solid var(--vhs-blue-light);
-  color: var(--vhs-white);
+  background: transparent;
+  border: 1px solid var(--vhs-blue-dark);
+  color: var(--vhs-white-dim);
   padding: 0.5rem 1rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+  transition: color 0.15s, border-color 0.15s;
 }
 
 .control-btn:hover:not(:disabled) {
-  border-color: var(--vhs-white);
-  box-shadow: 0 0 15px rgba(85, 85, 255, 0.5);
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+  color: var(--vhs-white);
+  border-color: var(--vhs-blue-light);
 }
 
 .control-btn:disabled {
@@ -287,16 +245,13 @@ body {
 }
 
 .play-btn {
-  border: 1px solid var(--vhs-blue-bright);
+  border-color: var(--vhs-blue-light);
   color: var(--vhs-white);
-  box-shadow: 0 0 10px rgba(85, 85, 255, 0.3);
   padding: 0.5rem 1.5rem;
 }
 
 .play-btn:hover:not(:disabled) {
-  background: var(--vhs-blue-bright);
-  color: var(--vhs-white);
-  box-shadow: 0 0 25px rgba(85, 85, 255, 0.8);
+  border-color: var(--vhs-white-dim);
 }
 
 .fullscreen-btn {
@@ -304,19 +259,13 @@ body {
   font-size: 1.2rem;
 }
 
-.fullscreen-btn:hover:not(:disabled) {
-  background: var(--vhs-blue-light);
-}
-
 .eject-btn {
   margin-left: 0.5rem;
-  border-color: var(--vhs-white-dim);
 }
 
 .eject-btn:hover:not(:disabled) {
-  border-color: var(--vhs-white);
-  background: var(--vhs-blue-light);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  color: var(--vhs-white);
+  border-color: var(--vhs-white-dim);
 }
 
 .track-info {
@@ -335,11 +284,10 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
 .track-divider {
-  color: var(--vhs-blue-light);
+  color: var(--vhs-blue-dark);
 }
 
 .track-title {
@@ -347,13 +295,11 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
 .track-empty {
   color: var(--vhs-white-ghost);
   animation: blink 1.5s step-end infinite;
-  text-shadow: 0 0 8px rgba(85, 85, 255, 0.4);
 }
 
 @keyframes blink {
@@ -362,58 +308,38 @@ body {
 }
 
 .queue-toggle {
-  background: var(--vhs-blue-darker);
-  border: 1px solid var(--vhs-blue-light);
-  color: var(--vhs-white);
+  background: transparent;
+  border: 1px solid var(--vhs-blue-dark);
+  color: var(--vhs-white-dim);
   padding: 0.5rem 1rem;
   font-family: 'Terminal Grotesque', monospace;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+  transition: color 0.15s, border-color 0.15s;
 }
 
 .queue-toggle:hover {
-  border-color: var(--vhs-white);
-  box-shadow: 0 0 15px rgba(85, 85, 255, 0.5);
+  color: var(--vhs-white);
+  border-color: var(--vhs-blue-light);
 }
 
-/* === Error Banner === */
+/* === Error Banner — flat === */
 .error-banner {
-  background: var(--vhs-blue-dark);
-  border-bottom: 2px solid var(--vhs-white);
+  background: var(--vhs-blue-darker);
+  border-bottom: 1px solid var(--vhs-white-dim);
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   position: relative;
   z-index: 99;
-  animation: slide-down 0.3s ease-out;
-}
-
-@keyframes slide-down {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 
 .error-icon {
   color: var(--vhs-white);
   font-size: 1.25rem;
-  animation: pulse-error 1s step-end infinite;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-}
-
-@keyframes pulse-error {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0.3; }
 }
 
 .error-message {
@@ -422,25 +348,23 @@ body {
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
 }
 
 .error-dismiss {
   background: transparent;
-  border: 1px solid var(--vhs-white);
+  border: 1px solid var(--vhs-white-dim);
   color: var(--vhs-white);
   padding: 0.25rem 0.75rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.75rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.15s;
   letter-spacing: 1px;
 }
 
 .error-dismiss:hover {
   background: var(--vhs-white);
   color: var(--vhs-blue-darker);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 /* === Main Container === */
@@ -450,7 +374,7 @@ body {
   overflow: hidden;
 }
 
-/* === Video Area === */
+/* === Video Area — all CRT/VHS effects live here === */
 .video-area {
   flex: 1;
   background: var(--vhs-blue-darker);
@@ -523,12 +447,6 @@ body {
 
 .now-playing {
   text-align: center;
-  animation: fade-in 0.5s ease-out;
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .np-label {
@@ -693,62 +611,46 @@ body {
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
-/* === Queue Sidebar === */
+/* === Queue Sidebar — clean, flat === */
 .queue-sidebar {
   width: 400px;
   background: var(--vhs-blue-darker);
-  border-left: 2px solid var(--vhs-blue-bright);
+  border-left: 1px solid var(--vhs-blue-dark);
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: width 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: -5px 0 30px rgba(85, 85, 255, 0.2);
+  transition: width 0.3s ease;
   overflow: hidden;
   flex-shrink: 0;
 }
 
 .queue-sidebar::before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--vhs-blue-bright);
-  filter: blur(4px);
-  transition: opacity 0.3s ease;
+  display: none;
 }
 
 .queue-sidebar.closed {
   width: 0;
   border-left-width: 0;
-  box-shadow: none;
-}
-
-.queue-sidebar.closed::before {
-  opacity: 0;
 }
 
 .queue-header {
   padding: 1.5rem;
-  border-bottom: 1px solid var(--vhs-blue-light);
+  border-bottom: 1px solid var(--vhs-blue-dark);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--vhs-blue-dark);
+  background: var(--vhs-blue-darker);
 }
 
 .queue-title {
-  color: var(--vhs-white);
+  color: var(--vhs-white-dim);
   font-weight: bold;
   letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .queue-count {
-  color: var(--vhs-white-dim);
+  color: var(--vhs-white-ghost);
   font-size: 0.875rem;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
 .queue-list {
@@ -758,7 +660,7 @@ body {
 }
 
 .queue-list::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
 }
 
 .queue-list::-webkit-scrollbar-track {
@@ -766,8 +668,7 @@ body {
 }
 
 .queue-list::-webkit-scrollbar-thumb {
-  background: var(--vhs-blue-light);
-  box-shadow: 0 0 4px rgba(85, 85, 255, 0.4);
+  background: var(--vhs-blue-dark);
 }
 
 .queue-item {
@@ -775,12 +676,12 @@ body {
   margin-bottom: 0;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--vhs-blue-dark);
+  border-bottom: 1px solid rgba(0, 0, 102, 0.5);
   cursor: pointer;
   display: flex;
   gap: 1rem;
   align-items: center;
-  transition: all 0.2s;
+  transition: background 0.15s;
   position: relative;
 }
 
@@ -790,40 +691,37 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 2px;
   background: transparent;
-  transition: all 0.2s;
+  transition: background 0.15s;
 }
 
 .queue-item:hover {
-  background: rgba(85, 85, 255, 0.08);
+  background: rgba(85, 85, 255, 0.04);
 }
 
 .queue-item:hover::before {
-  background: var(--vhs-blue-bright);
-  box-shadow: 0 0 8px rgba(85, 85, 255, 0.5);
+  background: var(--vhs-blue-light);
 }
 
 .queue-item.active {
-  background: rgba(85, 85, 255, 0.1);
+  background: rgba(85, 85, 255, 0.06);
 }
 
 .queue-item.active::before {
   background: var(--vhs-white);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .queue-item-number {
   font-family: 'Terminal Grotesque', monospace;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--vhs-blue-light);
+  color: var(--vhs-blue-dark);
   min-width: 2.5rem;
 }
 
 .queue-item.active .queue-item-number {
   color: var(--vhs-white);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
 .queue-item-content {
@@ -844,7 +742,6 @@ body {
 
 .queue-item.active .queue-item-artist {
   color: var(--vhs-white);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .queue-item-title {

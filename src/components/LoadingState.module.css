@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 30, 0.96);
+  background: rgba(0, 0, 30, 0.97);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,6 @@
   font-size: 48px;
   color: var(--vhs-white);
   animation: spin 1s linear infinite;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 @keyframes spin {
@@ -44,9 +43,6 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   min-height: 28px;
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.6),
-    0 0 20px rgba(85, 85, 255, 0.4);
 }
 
 .loadingSteps {
@@ -59,7 +55,7 @@
 .loadingStep {
   font-family: 'Terminal Grotesque', monospace;
   font-size: 14px;
-  color: var(--vhs-blue-light);
+  color: var(--vhs-white-ghost);
   padding: 8px 12px;
   border-left: 2px solid var(--vhs-blue-dark);
   transition: all 0.3s;
@@ -68,14 +64,12 @@
 .loadingStep.active {
   color: var(--vhs-white);
   border-left-color: var(--vhs-white);
-  background: rgba(85, 85, 255, 0.1);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 .loadingStep.completed {
   color: var(--vhs-white-dim);
-  border-left-color: var(--vhs-blue-bright);
+  border-left-color: var(--vhs-blue-light);
 }
 
 @keyframes pulse {
@@ -89,7 +83,7 @@
 
 .loadingProgress {
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: var(--vhs-blue-dark);
   position: relative;
   overflow: hidden;
@@ -101,7 +95,7 @@
   left: 0;
   height: 100%;
   width: 30%;
-  background: linear-gradient(90deg, transparent, var(--vhs-white), transparent);
+  background: var(--vhs-white);
   animation: progress 1.5s ease-in-out infinite;
 }
 
