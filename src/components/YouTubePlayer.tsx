@@ -8,6 +8,7 @@ import styles from './YouTubePlayer.module.css';
 
 interface YouTubePlayerProps {
   videoId: string;
+  isPlaying?: boolean;
   onStateChange?: (state: PlayerState) => void;
   onError?: () => void;
   onReady?: () => void;
@@ -18,6 +19,7 @@ const PLAYER_ID = 'youtube-player';
 
 export function YouTubePlayer({
   videoId,
+  isPlaying,
   onStateChange,
   onError,
   onReady,
@@ -33,7 +35,7 @@ export function YouTubePlayer({
     [onError]
   );
 
-  const { isReady, loadVideo, play } = useYouTubePlayer(PLAYER_ID, {
+  const { isReady, loadVideo, play, pause } = useYouTubePlayer(PLAYER_ID, {
     onStateChange,
     onError: handleError,
     onReady,
@@ -54,6 +56,17 @@ export function YouTubePlayer({
       }
     }
   }, [videoId, isReady, loadVideo, play, autoplay]);
+
+  // Sync play/pause state from parent
+  useEffect(() => {
+    if (!isReady || isPlaying === undefined) return;
+
+    if (isPlaying) {
+      play();
+    } else {
+      pause();
+    }
+  }, [isPlaying, isReady, play, pause]);
 
   return (
     <div className={styles.youtubePlayerContainer}>

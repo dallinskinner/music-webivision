@@ -234,6 +234,7 @@ function App() {
           {currentTrack ? (
             <YouTubePlayer
               videoId={currentTrack.videoId}
+              isPlaying={isPlaying}
               onStateChange={handlePlayerStateChange}
               onError={handlePlayerError}
               autoplay={true}
