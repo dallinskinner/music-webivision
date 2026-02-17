@@ -205,6 +205,18 @@ body {
   color: var(--black);
 }
 
+.eject-btn {
+  margin-left: 0.5rem;
+  border-color: rgba(255, 51, 102, 0.3);
+}
+
+.eject-btn:hover:not(:disabled) {
+  border-color: #ff3366;
+  background: #ff3366;
+  color: var(--black);
+  box-shadow: 0 0 20px rgba(255, 51, 102, 0.6);
+}
+
 .track-info {
   display: flex;
   align-items: center;

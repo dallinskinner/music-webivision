@@ -6,7 +6,7 @@ import { LoadingState } from './components/LoadingState'
 import { usePlaylistBuilder } from './hooks/usePlaylistBuilder'
 import { PlayerState } from './hooks/useYouTubePlayer'
 import type { Track } from './api/types'
-import { savePlaylist, loadPlaylist } from './utils/playlistStorage'
+import { savePlaylist, loadPlaylist, clearPlaylist } from './utils/playlistStorage'
 import { AuthButton } from './components/AuthButton'
 
 function App() {
@@ -111,6 +111,16 @@ function App() {
     playNextTrack()
   }, [playNextTrack])
 
+  const handleEject = useCallback(() => {
+    setQueue([])
+    setCurrentTrack(null)
+    setCurrentTrackIndex(0)
+    setIsPlaying(false)
+    setCurrentArtistName('')
+    setApiError(null)
+    clearPlaylist()
+  }, [])
+
   const toggleFullscreen = useCallback(async () => {
     const videoArea = document.querySelector('.video-area')
 
@@ -187,11 +197,20 @@ function App() {
           >
             <span>{isFullscreen ? '⊡' : '⊞'}</span>
           </button>
+          <button
+            className="control-btn eject-btn"
+            onClick={handleEject}
+            disabled={queue.length === 0 && !currentTrack}
+            title="Eject"
+          >
+            <span>⏏</span>
+          </button>
         </div>
 
         <div className="transport-divider"></div>
 
         <SearchBar
+          key={currentArtistName}
           onArtistSelect={handleArtistSelect}
           disabled={isLoadingPlaylist}
         />
