@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(8, 12, 20, 0.96);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@
 
 .loadingSpinnerLarge {
   font-size: 48px;
-  color: #00ffcc;
+  color: var(--accent);
   animation: spin 1s linear infinite;
 }
 
@@ -37,13 +37,14 @@
 }
 
 .loadingMessage {
-  font-family: 'Courier New', monospace;
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 18px;
-  color: #00ffcc;
+  color: var(--active);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
   min-height: 28px;
+  text-shadow: 0 0 8px rgba(212, 145, 92, 0.3);
 }
 
 .loadingSteps {
@@ -54,24 +55,24 @@
 }
 
 .loadingStep {
-  font-family: 'Courier New', monospace;
+  font-family: 'Terminal Grotesque', monospace;
   font-size: 14px;
-  color: #00ffcc40;
+  color: var(--grey);
   padding: 8px 12px;
-  border-left: 2px solid #00ffcc20;
+  border-left: 2px solid var(--grey);
   transition: all 0.3s;
 }
 
 .loadingStep.active {
-  color: #00ffcc;
-  border-left-color: #00ffcc;
-  background: #00ffcc10;
-  animation: pulse 1.5s ease-in-out infinite;
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: rgba(45, 212, 191, 0.05);
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .loadingStep.completed {
-  color: #00ffcc80;
-  border-left-color: #00ffcc80;
+  color: var(--grey-mid);
+  border-left-color: var(--accent-dim);
 }
 
 @keyframes pulse {
@@ -79,14 +80,14 @@
     opacity: 1;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.5;
   }
 }
 
 .loadingProgress {
   width: 100%;
   height: 2px;
-  background: #00ffcc20;
+  background: var(--grey);
   position: relative;
   overflow: hidden;
   border-radius: 1px;
@@ -98,7 +99,7 @@
   left: 0;
   height: 100%;
   width: 30%;
-  background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+  background: linear-gradient(90deg, transparent, var(--active), transparent);
   animation: progress 1.5s ease-in-out infinite;
 }
 

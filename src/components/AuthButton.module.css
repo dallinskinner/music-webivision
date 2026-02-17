@@ -19,33 +19,36 @@
 }
 
 .authBracket {
-  color: var(--grey-light);
+  color: var(--grey-mid);
 }
 
 .authBtn {
-  background: var(--black);
-  border: 1px solid rgba(98, 144, 152, 0.3);
-  color: var(--white);
+  background: linear-gradient(180deg, var(--grey) 0%, var(--grey-dark) 100%);
+  border: 1px solid var(--grey);
+  border-top-color: rgba(138, 154, 181, 0.2);
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+  color: var(--grey-light);
   padding: 0.4rem 0.75rem;
   font-family: 'Terminal Grotesque', monospace;
   font-size: 0.8rem;
   letter-spacing: 1px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: all 0.2s;
+  transition: all 0.15s;
+  border-radius: 3px;
 }
 
 .authBtn:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 20px rgba(98, 144, 152, 0.6);
-  transform: translateY(-2px);
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.2);
 }
 
 .authDisconnect {
-  color: var(--grey-light);
+  color: var(--grey-mid);
   font-size: 0.7rem;
 }
 
 .authDisconnect:hover {
-  color: var(--white);
+  color: var(--grey-light);
 }
